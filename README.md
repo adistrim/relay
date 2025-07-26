@@ -1,3 +1,18 @@
+# Relay (Go based URL Shortener)
+
+Relay is a high performance URL shortener built with Go and PostgreSQL.
+
+## Architecture
+
+The application accepts a long URL and performs a single `INSERT` into the database.
+
+The unique short code is created directly within PostgreSQL using a `GENERATED ALWAYS AS` column. This approach is highly efficient.
+
+The generation process is:
+  1.  A new row gets a sequential `id`.
+  2.  The `short_code` column calls a custom SQL function, `encode_base62(id)`.
+  3.  The function shuffles the `id` to make it non-sequential and then encodes it into a base-62 string.
+
 ## Local Performance Benchmarks (Apple Silicon - M1)
 ```bash
 adityaraj@macair testing % k6 run test.js
