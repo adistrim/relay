@@ -60,3 +60,6 @@ adityaraj@macair testing % k6 run test.js
 running (0m50.0s), 0000/3000 VUs, 612087 complete and 0 interrupted iterations
 default ✓ [======================================] 0000/3000 VUs  50s
 ```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
