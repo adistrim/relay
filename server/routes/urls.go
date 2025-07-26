@@ -28,3 +28,16 @@ func CreateShortUrl(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{"short_url": shortUrl})
 }
+
+func Forward(c *gin.Context) {
+	code := c.Param("code")
+
+	longUrl, err := services.GetLongUrl(code)
+
+	if longUrl == "" || err != nil {
+		c.String(http.StatusNotFound, "404 Not Found: The requested URL does not exist.")
+		return
+	}
+
+	c.Redirect(http.StatusMovedPermanently, longUrl)
+}
