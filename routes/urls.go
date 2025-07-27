@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"relay/services"
+	"relay/templates"
 )
 
 func CreateShortUrl(c *gin.Context) {
@@ -58,7 +59,7 @@ func Forward(c *gin.Context) {
 	longUrl, err := services.GetLongUrl(code)
 
 	if longUrl == "" || err != nil {
-		ServeErrorPage(c, "404 Not Found: The requested URL does not exist.")
+		templates.ServeErrorPage(c, "404 Not Found: The requested URL does not exist.")
 		return
 	}
 
