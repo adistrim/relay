@@ -2,35 +2,34 @@ package routes
 
 import (
 	"html/template"
-	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/redis/go-redis/v9"
+	"relay/middleware"
 	"relay/templates"
 )
 
-func MainRouter() *gin.Engine {
+func MainRouter(redisClient *redis.Client) *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
+
+	router.SetTrustedProxies(nil)
+	
+	generalRateLimiter := middleware.RateLimitMiddleware(redisClient, 30, 1*time.Minute)
+	strictRateLimiter := middleware.RateLimitMiddleware(redisClient, 10, 1*time.Minute)
+
+	router.Use(generalRateLimiter)
 
 	tmpl := template.Must(template.ParseFS(templates.TemplatesFS, "html/*"))
 	router.SetHTMLTemplate(tmpl)
 
 	router.GET("/api", InitRouter)
 	router.GET("/api/health", HealthCheck)
-	router.POST("/api/shorten", CreateShortUrl)
+	router.POST("/api/shorten", CreateShortUrl, strictRateLimiter)
 
-	router.GET("/", ServeHomePage)
+	router.GET("/", templates.ServeHomePage)
 	router.GET("/:code", Forward)
 
 	return router
-}
-
-func ServeHomePage(c *gin.Context) {
-	c.HTML(http.StatusOK, "home.html", gin.H{})
-}
-
-func ServeErrorPage(c *gin.Context, message string) {
-	c.HTML(http.StatusNotFound, "error.html", gin.H{
-		"message": message,
-	})
 }
