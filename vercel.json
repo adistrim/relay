@@ -1,4 +1,3 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
-  "includeFiles": ["templates/**"]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
