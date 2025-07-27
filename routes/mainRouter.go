@@ -1,14 +1,19 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
+	"html/template"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"relay/templates"
 )
 
 func MainRouter() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
-	router.LoadHTMLGlob("templates/*")
+	tmpl := template.Must(template.ParseFS(templates.TemplatesFS, "html/*"))
+	router.SetHTMLTemplate(tmpl)
 
 	router.GET("/api", InitRouter)
 	router.GET("/api/health", HealthCheck)
