@@ -41,7 +41,7 @@ func CreateShortUrl(c *gin.Context) {
 
 	host := c.Request.Host
 	scheme := "http"
-	if c.Request.TLS != nil {
+	if c.Request.Header.Get("X-Forwarded-Proto") == "https" {
 		scheme = "https"
 	}
 	fullShortUrl := scheme + "://" + host + "/" + shortCode
