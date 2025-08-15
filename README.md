@@ -41,6 +41,9 @@ This isn't a scientific or realistic benchmark, but it gives an idea of the perf
 
 The test was ran using [k6](https://k6.io/) and the machine was a MacBook Air M1 with 8GB RAM.
 
+<details>
+<summary>Test Results</summary>
+
 ```bash
 adityaraj@macair testing % k6 run test.js
 
@@ -87,6 +90,8 @@ adityaraj@macair testing % k6 run test.js
 running (0m50.0s), 0000/3000 VUs, 612087 complete and 0 interrupted iterations
 default ✓ [======================================] 0000/3000 VUs  50s
 ```
+
+</details>
 
 ## Setup
 1.  Clone the repository and navigate to the project directory:
