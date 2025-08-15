@@ -2,7 +2,7 @@
 
 Relay is a high performance URL shortener built with Go and PostgreSQL.
 
-<details>
+<details open>
 <summary>Table of Contents</summary>
 
 - [Architecture](#architecture)
