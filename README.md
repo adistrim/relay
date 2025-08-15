@@ -4,12 +4,12 @@ Relay is a high performance URL shortener built with Go and PostgreSQL.
 
 <details>
 <summary>Table of Contents</summary>
-- [Architecture](#architecture)
-- [Caching](#caching)
-- [Rate Limiting](#rate-limiting)
-- [Performance Benchmarks](#performance-benchmarks)
-- [Setup](#setup)
-- [License](#license)
+    - [Architecture](#architecture)
+    - [Caching](#caching)
+    - [Rate Limiting](#rate-limiting)
+    - [Performance Benchmarks](#performance-benchmarks)
+    - [Setup](#setup)
+    - [License](#license)
 </details>
 
 ## Architecture
